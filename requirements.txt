@@ -1,0 +1,5 @@
+pymupdf>=1.26
+pymupdf-layout>=1.26
+pymupdf4llm>=0.3
+pypdf>=5.4
+Pillow>=11

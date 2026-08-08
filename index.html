@@ -7,6 +7,7 @@
   <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet">
   <meta name="referrer" content="no-referrer">
   <meta name="description" content="An interactive topic guide to Austin Fife's Light and Truth Letter.">
+  <link rel="icon" href="data:,">
   <title>Light and Truth Letter · Evidences of the True Church</title>
   <script>
     (() => {
@@ -787,7 +788,7 @@
     .reader-result:hover { border-color: var(--cp-gold); }
     .reader-result strong { color: var(--cp-gold-hover); }
     .reader-result span { color: var(--cp-text-muted); }
-    .reader-pages { display: grid; gap: 18px; }
+    .reader-pages { display: grid; gap: 24px; }
     .letter-page {
       scroll-margin-top: 176px;
       border: 1px solid var(--cp-border);
@@ -812,27 +813,162 @@
       text-transform: uppercase;
     }
     .page-body {
-      max-width: 76ch;
+      max-width: 80rem;
       margin: auto;
-      padding: clamp(24px, 5vw, 52px);
+      padding: clamp(26px, 5vw, 64px);
+      font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+      font-size: 1rem;
+      line-height: 1.66;
+    }
+    .page-body > * {
+      width: min(100%, 72ch);
+      margin-inline: auto;
+    }
+    .page-body .document-block { margin-block: 0 1.15em; }
+    .document-heading {
+      width: min(100%, 78rem);
+      margin: 2.35rem auto 1.5rem;
+      padding: .7em clamp(16px, 3vw, 30px);
+      background: var(--cp-brand-strong);
+      color: #fff;
       font-family: Georgia, "Times New Roman", serif;
-      font-size: 1.03rem;
-      line-height: 1.72;
+      font-weight: 600;
+      line-height: 1.16;
+      text-wrap: balance;
+      box-shadow: inset 0 -3px 0 var(--cp-gold);
     }
-    .page-body p { margin: 0 0 1.15em; }
-    .page-body h3 {
-      margin: 0 0 .75em;
-      color: var(--cp-text);
-      font: 600 clamp(1.35rem, 3vw, 2rem)/1.2 Georgia, "Times New Roman", serif;
+    .document-heading:first-child { margin-top: 0; }
+    .document-heading.level-2 { font-size: clamp(1.65rem, 4vw, 2.65rem); }
+    .document-heading.level-3 { font-size: clamp(1.35rem, 3vw, 1.9rem); }
+    .document-heading.level-4 {
+      max-width: 72ch;
+      background: transparent;
+      color: var(--cp-gold-hover);
+      font-family: "Segoe UI", Aptos, Calibri, sans-serif;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: .06em;
+      text-align: center;
+      text-transform: uppercase;
+      box-shadow: none;
     }
-    .page-body blockquote {
-      margin: 1.25em 0;
+    .page-body .pull-quote {
+      margin-block: 2rem;
       border-block: 1px solid var(--cp-border);
-      padding: 1.1em 0;
-      color: var(--cp-text-muted);
+      padding: 1.45em clamp(12px, 4vw, 38px);
+      color: var(--cp-text);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(1.05rem, 2vw, 1.22rem);
       font-style: italic;
+      line-height: 1.72;
+      text-align: center;
     }
-    .page-body ul { padding-left: 1.4em; }
+    .page-body .pull-quote + .pull-quote {
+      margin-top: -2rem;
+      border-top: 0;
+    }
+    .page-body .is-centered { text-align: center; }
+    .page-body .question-callout {
+      position: relative;
+      width: min(100%, 68ch);
+      margin-block: 1.7rem;
+      padding: 1rem 1.1rem 1rem 3.4rem;
+      border-block: 1px solid var(--cp-gold);
+      background: var(--cp-gold-soft);
+      font-weight: 700;
+    }
+    .page-body .question-callout::before {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      display: grid;
+      width: 1.65rem;
+      height: 1.65rem;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--cp-gold);
+      color: var(--cp-brand-strong);
+      content: "→";
+      font-weight: 900;
+      transform: translateY(-50%);
+    }
+    .page-body sup {
+      color: var(--cp-gold-hover);
+      font-size: .68em;
+      font-weight: 800;
+      line-height: 0;
+    }
+    .document-list {
+      display: grid;
+      gap: .65rem;
+      padding: 0;
+      list-style: none;
+    }
+    .document-list li {
+      position: relative;
+      padding-left: 1.6rem;
+    }
+    .document-list li::before {
+      position: absolute;
+      top: .7em;
+      left: .15rem;
+      width: .5rem;
+      height: .5rem;
+      border-radius: 50%;
+      background: var(--cp-gold);
+      content: "";
+    }
+    .document-table-wrap {
+      width: min(100%, 78rem);
+      margin-block: 2rem;
+      overflow-x: auto;
+      border: 1px solid var(--cp-border);
+      background: var(--cp-bg-elevated);
+      box-shadow: var(--cp-card-shadow);
+      scrollbar-color: var(--cp-gold) var(--cp-bg-elevated);
+    }
+    .document-table {
+      width: 100%;
+      min-width: 680px;
+      border-collapse: collapse;
+      font-size: .86rem;
+      line-height: 1.45;
+    }
+    .document-table.columns-2 { min-width: 580px; }
+    .document-table th,
+    .document-table td {
+      padding: .85rem .95rem;
+      border: 1px solid var(--cp-border);
+      vertical-align: top;
+      text-align: left;
+    }
+    .document-table th {
+      background: var(--cp-brand-strong);
+      color: #fff;
+      font-weight: 750;
+    }
+    .document-table tr:nth-child(odd) td { background: var(--cp-brand-soft); }
+    .document-table td:first-child strong { color: var(--cp-gold-hover); }
+    .document-figure {
+      width: min(100%, 54rem);
+      margin-block: 2rem;
+    }
+    .document-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid var(--cp-border);
+      background: #fff;
+      box-shadow: var(--cp-card-shadow);
+    }
+    .page-body .source-note {
+      width: min(100%, 84ch);
+      margin-bottom: .85em;
+      color: var(--cp-text-muted);
+      font-size: .86rem;
+      line-height: 1.52;
+      text-align: left;
+    }
     .page-body a { overflow-wrap: anywhere; }
     .reader-chapter-nav {
       display: grid;
@@ -943,6 +1079,13 @@
       .about-grid { grid-template-columns: 1fr; }
       .perspective { grid-column: auto; }
       .detail-footer, .footer-inner { align-items: flex-start; flex-direction: column; }
+      .page-body { padding: 22px 16px 30px; }
+      .document-heading { margin-inline: -1px; }
+      .document-table-wrap {
+        width: calc(100% + 32px);
+        margin-inline: -16px;
+        border-inline: 0;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
@@ -1460,7 +1603,7 @@
           ${sectionPages.map(page => `
             <article class="letter-page ${page.page === pageNumber ? "is-target" : ""}" id="letter-page-${page.page}">
               <header class="letter-page-header"><span>${escapeHtml(section.title)}</span><span>Page ${page.page}</span></header>
-              <div class="page-body">${formatPageText(page.text, page.page)}</div>
+              <div class="page-body ${page.page >= 208 ? "is-sources" : ""}">${page.html || formatPageText(page.text, page.page)}</div>
             </article>
           `).join("")}
         </div>
