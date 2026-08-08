@@ -697,6 +697,165 @@
     }
     .detail-footer span { color: var(--cp-text-muted); font-size: .86rem; }
 
+    .reader {
+      width: min(1080px, calc(100% - 40px));
+      margin: auto;
+      padding: 48px 0 80px;
+    }
+    .reader-header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 28px;
+      align-items: end;
+      margin-bottom: 24px;
+    }
+    .reader-kicker {
+      margin-bottom: 8px;
+      color: var(--cp-gold);
+      font-size: .75rem;
+      font-weight: 850;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .reader-header h2 {
+      margin-bottom: 0;
+      font: 500 clamp(2.3rem, 5vw, 4.5rem)/1.02 Georgia, "Times New Roman", serif;
+      letter-spacing: -.03em;
+    }
+    .reader-range {
+      color: var(--cp-text-muted);
+      font-size: .86rem;
+      font-weight: 750;
+    }
+    .reader-controls {
+      position: sticky;
+      top: 88px;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: minmax(260px, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 18px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      padding: 14px;
+      background: var(--cp-panel-strong);
+      box-shadow: var(--cp-card-shadow);
+      backdrop-filter: blur(12px);
+    }
+    .page-jump {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .page-jump label {
+      color: var(--cp-text-muted);
+      font-size: .78rem;
+      font-weight: 750;
+      white-space: nowrap;
+    }
+    .page-jump input {
+      width: 72px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      padding: 9px 10px;
+      background: var(--cp-bg-elevated);
+      color: var(--cp-text);
+    }
+    .reader-results {
+      display: grid;
+      gap: 8px;
+      margin: 0 0 18px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      padding: 14px;
+      background: var(--cp-surface);
+      box-shadow: var(--cp-card-shadow);
+    }
+    .reader-result {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      border: 1px solid var(--cp-border);
+      border-radius: 0.625rem;
+      padding: 11px 12px;
+      background: var(--cp-bg-elevated);
+      color: var(--cp-text);
+      cursor: pointer;
+      text-align: left;
+    }
+    .reader-result:hover { border-color: var(--cp-gold); }
+    .reader-result strong { color: var(--cp-gold-hover); }
+    .reader-result span { color: var(--cp-text-muted); }
+    .reader-pages { display: grid; gap: 18px; }
+    .letter-page {
+      scroll-margin-top: 176px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--cp-surface);
+      box-shadow: var(--cp-card-shadow);
+    }
+    .letter-page.is-target { border-color: var(--cp-gold); }
+    .letter-page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      border-bottom: 1px solid var(--cp-border);
+      padding: 12px 18px;
+      background: var(--cp-bg-elevated);
+      color: var(--cp-text-muted);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .page-body {
+      max-width: 76ch;
+      margin: auto;
+      padding: clamp(24px, 5vw, 52px);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 1.03rem;
+      line-height: 1.72;
+    }
+    .page-body p { margin: 0 0 1.15em; }
+    .page-body h3 {
+      margin: 0 0 .75em;
+      color: var(--cp-text);
+      font: 600 clamp(1.35rem, 3vw, 2rem)/1.2 Georgia, "Times New Roman", serif;
+    }
+    .page-body blockquote {
+      margin: 1.25em 0;
+      border-block: 1px solid var(--cp-border);
+      padding: 1.1em 0;
+      color: var(--cp-text-muted);
+      font-style: italic;
+    }
+    .page-body ul { padding-left: 1.4em; }
+    .page-body a { overflow-wrap: anywhere; }
+    .reader-chapter-nav {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .chapter-nav-button {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      border: 1px solid var(--cp-border);
+      border-radius: 16px;
+      padding: 16px;
+      background: var(--cp-surface);
+      color: var(--cp-text);
+      cursor: pointer;
+      text-align: left;
+    }
+    .chapter-nav-button:last-child { text-align: right; }
+    .chapter-nav-button:hover { border-color: var(--cp-gold); }
+    .chapter-nav-button small { color: var(--cp-text-muted); }
+
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -744,6 +903,7 @@
       .section-heading { grid-template-columns: 1fr; gap: 12px; }
       .detail-header { grid-template-columns: 1fr; }
       .detail-actions { justify-content: flex-start; }
+      .reader-header { grid-template-columns: 1fr; }
     }
     @media (max-width: 760px) {
       .header-inner {
@@ -762,12 +922,16 @@
         white-space: normal;
       }
       .brand small { display: none; }
-      .hero-inner, .explorer, .about, .footer-inner { width: min(100% - 28px, 1280px); }
+      .hero-inner, .explorer, .reader, .about, .footer-inner { width: min(100% - 28px, 1280px); }
       .hero-inner { min-height: auto; padding: 54px 0; }
       h1 { font-size: clamp(2.8rem, 15vw, 4.6rem); }
       .hero-art { display: none; }
-      .explorer, .about { padding: 40px 0 56px; }
+      .explorer, .reader, .about { padding: 40px 0 56px; }
       .controls { top: 76px; grid-template-columns: 1fr; }
+      .reader-controls { top: 76px; grid-template-columns: 1fr; }
+      .page-jump { flex-wrap: wrap; }
+      .reader-chapter-nav { grid-template-columns: 1fr; }
+      .chapter-nav-button:last-child { text-align: left; }
       .result-count { padding-left: 2px; }
       .topic-grid { grid-template-columns: 1fr; }
       .topic-card { min-height: 210px; }
@@ -785,8 +949,8 @@
       *, *::before, *::after { transition: none !important; }
     }
     @media print {
-      .site-header, .hero, .controls, .detail-actions, .detail-footer, footer { display: none !important; }
-      .explorer { width: 100%; padding: 0; }
+      .site-header, .hero, .controls, .reader-controls, .detail-actions, .detail-footer, footer { display: none !important; }
+      .explorer, .reader { width: 100%; padding: 0; }
       .issue-card { break-inside: avoid; }
       .issue-card .issue-content { display: grid; }
     }
@@ -805,12 +969,13 @@
       <nav class="main-nav" aria-label="Primary navigation">
         <button class="nav-button is-active" type="button" data-view="home">Home</button>
         <button class="nav-button" type="button" data-view="explore">Topics</button>
+        <button class="nav-button" type="button" data-view="read/1">Full Letter</button>
         <button class="nav-button" type="button" data-view="about">About</button>
       </nav>
       <div class="header-actions">
-        <a class="icon-button" href="./Light_and_Truth_Letter.pdf" target="_blank" rel="noopener" aria-label="Open the complete PDF" title="Open complete PDF">
+        <button class="icon-button" id="reader-button" type="button" aria-label="Read the complete letter" title="Read the complete letter">
           <svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>
-        </a>
+        </button>
         <button class="icon-button" id="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle color theme">
           <svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg>
         </button>
@@ -829,10 +994,10 @@
               Explore the topics
               <svg viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
             </button>
-            <a class="secondary-button" href="./Light_and_Truth_Letter.pdf" target="_blank" rel="noopener">
+            <button class="secondary-button" id="read-letter" type="button">
               Read the complete letter
-              <svg viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9"/><path d="M18 13v6H5V6h6"/></svg>
-            </a>
+              <svg viewBox="0 0 24 24"><path d="M5 12h14m-5-5 5 5-5 5"/></svg>
+            </button>
           </div>
           <div class="document-scope" id="document-scope">19 topics · 68 questions · 235 PDF pages</div>
         </div>
@@ -874,12 +1039,16 @@
       <article id="detail-view" hidden></article>
     </section>
 
+    <section class="reader" id="reader-view" aria-label="Complete Light and Truth Letter" hidden>
+      <div id="reader-content"></div>
+    </section>
+
     <section class="about" id="about-view" aria-labelledby="about-heading">
       <div class="section-heading">
         <div>
           <h2 id="about-heading">A map, not a replacement</h2>
         </div>
-        <p>This page shortens a 235-page personal letter into an accessible path through its major claims. The PDF remains the definitive source.</p>
+        <p>This page offers both a topic map and the complete 235-page letter in a consistent, accessible reading experience.</p>
       </div>
       <div class="about-grid">
         <article class="about-card">
@@ -888,7 +1057,7 @@
         </article>
         <article class="about-card">
           <h3>How to use the explorer</h3>
-          <p>Browse by chapter, search for an issue, and expand each question. Every response includes a page-level link so readers can inspect the full argument, footnotes, tables, and qualifications in the letter.</p>
+          <p>Browse by chapter, search for an issue, and expand each question. Every response links directly to the corresponding passage in the complete in-site reader, including footnotes and source notes.</p>
         </article>
         <article class="about-card perspective">
           <h3>Perspective and scope</h3>
@@ -901,12 +1070,12 @@
   <footer>
     <div class="footer-inner">
       <div><strong>Light and Truth Letter</strong><br>Interactive study guide · January 2025 edition</div>
-      <div><a href="./Light_and_Truth_Letter.pdf" target="_blank" rel="noopener">Complete PDF</a> · <a href="https://www.lightandtruthletter.org/" target="_blank" rel="noopener">Author website</a></div>
+      <div><a href="#read/1">Read the complete letter</a> · <a href="https://www.lightandtruthletter.org/" target="_blank" rel="noopener">Author website</a></div>
     </div>
   </footer>
 
+  <script src="./letter-content.js"></script>
   <script>
-    const PDF = "./Light_and_Truth_Letter.pdf";
     const groups = [
       "Reading Criticism",
       "Book of Mormon Evidence",
@@ -1125,8 +1294,39 @@
       }
     ];
 
+    const readerSections = [
+      { id: "opening", title: "Opening Pages", start: 1, end: 4 },
+      { id: "introduction", title: "Introduction", start: 5, end: 5 },
+      { id: "disclosures", title: "Disclosures", start: 6, end: 6 },
+      { id: "contents", title: "Table of Contents", start: 7, end: 7 },
+      { id: "manipulation-fallacies", title: "Manipulation and Fallacies", start: 8, end: 20 },
+      { id: "coming-forth", title: "The Coming Forth of the Book of Mormon", start: 21, end: 38 },
+      { id: "linguistic-evidence", title: "Book of Mormon | Linguistic Evidence", start: 39, end: 54 },
+      { id: "archaeology-dna", title: "Book of Mormon | Archaeology, DNA, & Anachronisms", start: 55, end: 75 },
+      { id: "witnesses", title: "Book of Mormon Witnesses", start: 76, end: 83 },
+      { id: "critical-theories", title: "Evidence for Critical Theories", start: 84, end: 92 },
+      { id: "how-joseph-knew", title: "How Did Joseph Smith Know?", start: 93, end: 106 },
+      { id: "fruits", title: "Fruits of the Church", start: 107, end: 133 },
+      { id: "women", title: "Women in the Church", start: 134, end: 139 },
+      { id: "temples", title: "Temples and Ancient Connections", start: 140, end: 148 },
+      { id: "testimony", title: "Testimony and Spiritual Witnesses", start: 149, end: 154 },
+      { id: "prophets", title: "Prophets and Ongoing Revelation", start: 155, end: 161 },
+      { id: "finances", title: "Church Finances", start: 162, end: 167 },
+      { id: "abuse", title: "Abuse in the Church", start: 168, end: 171 },
+      { id: "lgbtq", title: "LGBTQ+ Issues", start: 172, end: 176 },
+      { id: "plural-marriage", title: "Plural Marriage", start: 177, end: 181 },
+      { id: "other-concerns", title: "Other Questions & Concerns", start: 182, end: 188 },
+      { id: "critical-myths", title: "Summary of Critical Myths", start: 189, end: 196 },
+      { id: "belief-in-god", title: "Belief in God", start: 197, end: 200 },
+      { id: "conclusion", title: "Conclusion", start: 201, end: 203 },
+      { id: "epilogue", title: "Epilogue", start: 204, end: 207 },
+      { id: "sources", title: "Sources and Notes", start: 208, end: 235 }
+    ];
+
     const catalogView = document.getElementById("catalog-view");
     const detailView = document.getElementById("detail-view");
+    const readerView = document.getElementById("reader-view");
+    const readerContent = document.getElementById("reader-content");
     const searchInput = document.getElementById("search-input");
     const clearSearch = document.getElementById("clear-search");
     const resultCount = document.getElementById("result-count");
@@ -1137,7 +1337,7 @@
 
     const allIssues = topics.flatMap(topic => topic.issues);
     document.getElementById("document-scope").textContent =
-      `${topics.length} topics · ${allIssues.length} questions · 235 PDF pages`;
+      `${topics.length} topics · ${allIssues.length} questions · 235 complete pages`;
 
     function escapeHtml(value) {
       return String(value).replace(/[&<>"']/g, char => ({
@@ -1152,11 +1352,137 @@
       ].join(" ").toLowerCase();
     }
 
+    function formatInline(value) {
+      return escapeHtml(value).replace(/https?:\/\/[^\s<]+/g, match => {
+        const clean = match.replace(/[),.;]+$/, "");
+        const trailing = match.slice(clean.length);
+        return `<a href="${clean}" target="_blank" rel="noopener">${clean}</a>${trailing}`;
+      });
+    }
+
+    function formatSourceNotes(text) {
+      const notes = [];
+      let current = "";
+      text.split("\n").map(line => line.trim()).filter(Boolean).forEach(line => {
+        if (/^\d+\s/.test(line) && current) {
+          notes.push(current);
+          current = line;
+        } else {
+          current += `${current ? " " : ""}${line}`;
+        }
+      });
+      if (current) notes.push(current);
+      return notes.map(note => `<p>${formatInline(note)}</p>`).join("");
+    }
+
+    function formatPageText(text, pageNumber) {
+      if (!text.trim()) return `<p class="empty-state">This page contains no extractable text.</p>`;
+      if (pageNumber >= 208) return formatSourceNotes(text);
+
+      const dehyphenated = text.replace(/([A-Za-z])-\n(?=[a-z])/g, "$1");
+      const blocks = dehyphenated.split(/\n\s*\n/).map(block => block.trim()).filter(Boolean);
+      return blocks.map((block, index) => {
+        const lines = block.split("\n").map(line => line.trim()).filter(Boolean);
+        const joined = lines.join(" ").replace(/\s{2,}/g, " ");
+        const bulletLines = lines.filter(line => /^([•●▪]|[-–]\s)/.test(line));
+        if (bulletLines.length >= 2) {
+          return `<ul>${bulletLines.map(line => `<li>${formatInline(line.replace(/^([•●▪]|[-–])\s*/, ""))}</li>`).join("")}</ul>`;
+        }
+        if (index < 2 && joined.length < 100 && !/[.!?]$/.test(joined)) {
+          return `<h3>${formatInline(joined)}</h3>`;
+        }
+        if (/^[“"]/.test(joined) && joined.length < 900) {
+          return `<blockquote>${formatInline(joined)}</blockquote>`;
+        }
+        return `<p>${formatInline(joined)}</p>`;
+      }).join("");
+    }
+
+    function readerSectionForPage(pageNumber) {
+      return readerSections.find(section => pageNumber >= section.start && pageNumber <= section.end) || readerSections[0];
+    }
+
+    function readerSearchResults(query) {
+      const results = document.getElementById("reader-results");
+      if (!results) return;
+      const normalized = query.trim().toLowerCase();
+      if (!normalized) {
+        results.hidden = true;
+        results.innerHTML = "";
+        return;
+      }
+      const matches = window.LETTER_PAGES.filter(page => page.text.toLowerCase().includes(normalized)).slice(0, 60);
+      results.hidden = false;
+      results.innerHTML = matches.length
+        ? matches.map(page => {
+            const lower = page.text.toLowerCase();
+            const start = Math.max(0, lower.indexOf(normalized) - 72);
+            const snippet = page.text.slice(start, start + 190).replace(/\s+/g, " ").trim();
+            return `<button class="reader-result" type="button" data-read-page="${page.page}">
+              <strong>Page ${page.page}</strong><span>${escapeHtml(start ? `…${snippet}` : snippet)}…</span>
+            </button>`;
+          }).join("")
+        : `<div class="empty-state">No pages contain “${escapeHtml(query.trim())}”.</div>`;
+    }
+
+    function renderReader(requestedPage) {
+      const pageNumber = Math.min(235, Math.max(1, Number(requestedPage) || 1));
+      const section = readerSectionForPage(pageNumber);
+      const sectionIndex = readerSections.indexOf(section);
+      const sectionPages = window.LETTER_PAGES.filter(page => page.page >= section.start && page.page <= section.end);
+      const previous = readerSections[sectionIndex - 1];
+      const next = readerSections[sectionIndex + 1];
+
+      readerContent.innerHTML = `
+        <header class="reader-header">
+          <div>
+            <div class="reader-kicker">Complete letter · Austin Fife</div>
+            <h2>${escapeHtml(section.title)}</h2>
+          </div>
+          <div class="reader-range">Pages ${section.start}${section.end === section.start ? "" : `–${section.end}`} of 235</div>
+        </header>
+        <div class="reader-controls">
+          <div class="search-field" role="search">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+            <input id="reader-search" type="search" aria-label="Search the complete letter" placeholder="Search all 235 pages…" autocomplete="off">
+            <button type="button" data-reader-search-clear aria-label="Clear full-letter search" hidden>
+              <svg viewBox="0 0 24 24"><path d="m7 7 10 10M17 7 7 17"/></svg>
+            </button>
+          </div>
+          <div class="page-jump">
+            <label for="page-jump-input">Go to page</label>
+            <input id="page-jump-input" type="number" min="1" max="235" value="${pageNumber}" inputmode="numeric">
+            <button class="text-button" type="button" data-page-go>Go</button>
+          </div>
+        </div>
+        <div class="reader-results" id="reader-results" aria-live="polite" hidden></div>
+        <div class="reader-pages">
+          ${sectionPages.map(page => `
+            <article class="letter-page ${page.page === pageNumber ? "is-target" : ""}" id="letter-page-${page.page}">
+              <header class="letter-page-header"><span>${escapeHtml(section.title)}</span><span>Page ${page.page}</span></header>
+              <div class="page-body">${formatPageText(page.text, page.page)}</div>
+            </article>
+          `).join("")}
+        </div>
+        <nav class="reader-chapter-nav" aria-label="Chapter navigation">
+          ${previous ? `<button class="chapter-nav-button" type="button" data-read-page="${previous.start}"><small>Previous chapter</small><strong>← ${escapeHtml(previous.title)}</strong></button>` : "<span></span>"}
+          ${next ? `<button class="chapter-nav-button" type="button" data-read-page="${next.start}"><small>Next chapter</small><strong>${escapeHtml(next.title)} →</strong></button>` : "<span></span>"}
+        </nav>`;
+
+      requestAnimationFrame(() => {
+        document.getElementById(`letter-page-${pageNumber}`)?.scrollIntoView({ block: "start" });
+      });
+    }
+
     function currentRoute() {
       const raw = location.hash.replace(/^#/, "");
       if (raw.startsWith("topic/")) {
         const [, topicId, issueId] = raw.split("/");
         return { view: "topic", topicId, issueId };
+      }
+      if (raw.startsWith("read/")) {
+        const [, pageNumber] = raw.split("/");
+        return { view: "read", pageNumber };
       }
       if (raw === "about") return { view: "about" };
       if (raw === "explore") return { view: "explore" };
@@ -1165,7 +1491,8 @@
 
     function setNav(view) {
       document.querySelectorAll(".nav-button").forEach(button => {
-        button.classList.toggle("is-active", button.dataset.view === view);
+        const buttonView = button.dataset.view.startsWith("read/") ? "read" : button.dataset.view;
+        button.classList.toggle("is-active", buttonView === view);
       });
     }
 
@@ -1238,7 +1565,7 @@
           <div class="page-range">
             <small>Original chapter</small>
             <strong>Pages ${escapeHtml(topic.pages)}</strong>
-            <a href="${PDF}#page=${topic.pages.split("–")[0]}" target="_blank" rel="noopener">Open chapter in PDF ↗</a>
+            <a href="#read/${topic.pages.split("–")[0]}">Read the complete chapter →</a>
           </div>
         </div>
         <div class="issue-list">
@@ -1258,13 +1585,13 @@
                   <span class="position-label"><i></i>The letter's response</span>
                   <p>${escapeHtml(issue.response)}</p>
                 </section>
-                <div class="issue-source"><a href="${PDF}#page=${issue.p}" target="_blank" rel="noopener">Read page ${issue.p} in the original letter ↗</a></div>
+                <div class="issue-source"><a href="#read/${issue.p}">Read the full passage in the site reader →</a></div>
               </div>
             </details>
           `).join("")}
         </div>
         <div class="detail-footer">
-          <span>Summaries preserve the author's argument; the linked PDF includes full context and notes.</span>
+          <span>Summaries preserve the author's argument; the complete in-site reader includes full context and notes.</span>
           <button class="secondary-button" type="button" data-back>Return to all topics</button>
         </div>`;
 
@@ -1278,9 +1605,11 @@
     function renderRoute(options = {}) {
       const route = currentRoute();
       const isTopic = route.view === "topic";
+      const isReader = route.view === "read";
       homeView.hidden = route.view !== "home";
       aboutView.hidden = route.view !== "about";
       exploreView.hidden = !["explore", "topic"].includes(route.view);
+      readerView.hidden = !isReader;
       catalogHeading.hidden = isTopic;
       catalogView.hidden = isTopic;
       detailView.hidden = !isTopic;
@@ -1288,6 +1617,7 @@
       if (route.view === "home") setNav("home");
       if (route.view === "about") setNav("about");
       if (["explore", "topic"].includes(route.view)) setNav("explore");
+      if (isReader) setNav("read");
 
       if (isTopic) {
         const topic = topics.find(item => item.id === route.topicId);
@@ -1296,11 +1626,13 @@
           return;
         }
         renderDetail(topic, route.issueId);
+      } else if (isReader) {
+        renderReader(route.pageNumber);
       } else {
         renderCatalog();
       }
 
-      if (!options.preserveScroll) {
+      if (!options.preserveScroll && !isReader) {
         window.scrollTo({ top: 0, behavior: options.instant ? "auto" : "smooth" });
       }
     }
@@ -1316,6 +1648,12 @@
         location.hash = `topic/${topicButton.dataset.topic}`;
         return;
       }
+      const readPageButton = event.target.closest("[data-read-page]");
+      if (readPageButton) {
+        location.hash = `read/${readPageButton.dataset.readPage}`;
+        if (location.hash === `#read/${readPageButton.dataset.readPage}`) renderRoute();
+        return;
+      }
       if (event.target.closest("[data-back]")) {
         location.hash = "explore";
         return;
@@ -1328,10 +1666,36 @@
       if (event.target.closest("[data-collapse]")) {
         detailView.querySelectorAll("details").forEach(item => item.open = false);
       }
+      if (event.target.closest("[data-page-go]")) {
+        const page = Math.min(235, Math.max(1, Number(document.getElementById("page-jump-input")?.value) || 1));
+        location.hash = `read/${page}`;
+        if (location.hash === `#read/${page}`) renderRoute();
+      }
+      if (event.target.closest("[data-reader-search-clear]")) {
+        const input = document.getElementById("reader-search");
+        input.value = "";
+        input.focus();
+        event.target.closest("[data-reader-search-clear]").hidden = true;
+        readerSearchResults("");
+      }
     });
 
     document.getElementById("brand-home").addEventListener("click", () => navigate("home"));
     document.getElementById("start-exploring").addEventListener("click", () => navigate("explore"));
+    document.getElementById("read-letter").addEventListener("click", () => navigate("read/1"));
+    document.getElementById("reader-button").addEventListener("click", () => navigate("read/1"));
+    document.addEventListener("input", event => {
+      if (event.target.id !== "reader-search") return;
+      const clearButton = document.querySelector("[data-reader-search-clear]");
+      clearButton.hidden = !event.target.value;
+      readerSearchResults(event.target.value);
+    });
+    document.addEventListener("keydown", event => {
+      if (event.target.id === "page-jump-input" && event.key === "Enter") {
+        event.preventDefault();
+        document.querySelector("[data-page-go]")?.click();
+      }
+    });
     searchInput.addEventListener("input", () => {
       clearSearch.hidden = !searchInput.value;
       const route = currentRoute();
