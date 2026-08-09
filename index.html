@@ -992,6 +992,99 @@
     .chapter-nav-button:hover { border-color: var(--cp-gold); }
     .chapter-nav-button small { color: var(--cp-text-muted); }
 
+    .toc-panel {
+      width: min(100%, 78rem);
+      margin: 1.5rem auto 0;
+      display: grid;
+      gap: 1.1rem;
+    }
+    .toc-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border-bottom: 1px solid var(--cp-border);
+      padding-bottom: 12px;
+    }
+    .toc-hint {
+      margin: 0;
+      color: var(--cp-text-muted);
+      font-size: .92rem;
+    }
+    .toc-actions { display: flex; gap: 10px; }
+    .toc-groups { display: grid; gap: 12px; }
+    .toc-group {
+      border: 1px solid var(--cp-border);
+      border-radius: 14px;
+      background: var(--cp-bg-elevated);
+      box-shadow: var(--cp-card-shadow);
+      overflow: hidden;
+    }
+    .toc-group summary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 18px;
+      background: var(--cp-brand-strong);
+      color: #fff;
+      font-weight: 750;
+      cursor: pointer;
+      list-style: none;
+    }
+    .toc-group summary::-webkit-details-marker { display: none; }
+    .toc-group summary::before {
+      flex: none;
+      margin-right: 2px;
+      color: var(--cp-gold);
+      content: "▸";
+      transition: transform .15s ease;
+    }
+    .toc-group[open] summary::before { transform: rotate(90deg); }
+    .toc-group-title { flex: 1; }
+    .toc-group-count {
+      color: var(--cp-header-text);
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .04em;
+      opacity: .78;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .toc-chapter-list {
+      display: grid;
+      margin: 0;
+      padding: 8px;
+      list-style: none;
+    }
+    .toc-chapter-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 10px 14px;
+      background: none;
+      color: var(--cp-text);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+    }
+    .toc-chapter-link:hover, .toc-chapter-link:focus-visible {
+      background: var(--cp-gold-soft);
+      color: var(--cp-gold-hover);
+      outline: none;
+    }
+    .toc-chapter-page {
+      flex: none;
+      color: var(--cp-text-muted);
+      font-size: .82rem;
+      font-weight: 700;
+    }
+
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -1466,6 +1559,52 @@
       { id: "sources", title: "Sources and Notes", start: 208, end: 235 }
     ];
 
+    const TOC_GROUPS = [
+      { title: "Front Matter", ids: ["opening", "introduction", "disclosures"] },
+      { title: groups[0], ids: ["manipulation-fallacies"] },
+      { title: groups[1], ids: ["coming-forth", "linguistic-evidence", "archaeology-dna", "witnesses", "critical-theories", "how-joseph-knew"] },
+      { title: groups[2], ids: ["fruits", "women", "temples", "testimony", "prophets"] },
+      { title: groups[3], ids: ["finances", "abuse", "lgbtq", "plural-marriage", "other-concerns"] },
+      { title: groups[4], ids: ["critical-myths", "belief-in-god", "conclusion", "epilogue"] },
+      { title: "Sources and Notes", ids: ["sources"] }
+    ];
+
+    function renderTableOfContents() {
+      const groupsHtml = TOC_GROUPS.map(group => {
+        const items = group.ids
+          .map(id => readerSections.find(section => section.id === id))
+          .filter(Boolean)
+          .map(section => `
+            <li>
+              <button class="toc-chapter-link" type="button" data-read-page="${section.start}">
+                <span class="toc-chapter-title">${escapeHtml(section.title)}</span>
+                <span class="toc-chapter-page">p. ${section.start}</span>
+              </button>
+            </li>`)
+          .join("");
+        return `
+          <details class="toc-group" open>
+            <summary>
+              <span class="toc-group-title">${escapeHtml(group.title)}</span>
+              <span class="toc-group-count">${group.ids.length} ${group.ids.length === 1 ? "chapter" : "chapters"}</span>
+            </summary>
+            <ul class="toc-chapter-list">${items}</ul>
+          </details>`;
+      }).join("");
+
+      return `
+        <div class="toc-panel">
+          <div class="toc-toolbar">
+            <p class="toc-hint">Select any chapter below to jump straight to it in the reader.</p>
+            <div class="toc-actions">
+              <button class="text-button" type="button" data-toc-expand>Expand all</button>
+              <button class="text-button" type="button" data-toc-collapse>Collapse all</button>
+            </div>
+          </div>
+          <div class="toc-groups">${groupsHtml}</div>
+        </div>`;
+    }
+
     const catalogView = document.getElementById("catalog-view");
     const detailView = document.getElementById("detail-view");
     const readerView = document.getElementById("reader-view");
@@ -1603,7 +1742,7 @@
           ${sectionPages.map(page => `
             <article class="letter-page ${page.page === pageNumber ? "is-target" : ""}" id="letter-page-${page.page}">
               <header class="letter-page-header"><span>${escapeHtml(section.title)}</span><span>Page ${page.page}</span></header>
-              <div class="page-body ${page.page >= 208 ? "is-sources" : ""}">${page.html || formatPageText(page.text, page.page)}</div>
+              <div class="page-body ${page.page >= 208 ? "is-sources" : ""}">${page.page === 7 ? renderTableOfContents() : (page.html || formatPageText(page.text, page.page))}</div>
             </article>
           `).join("")}
         </div>
@@ -1814,6 +1953,16 @@
         location.hash = `read/${page}`;
         if (location.hash === `#read/${page}`) renderRoute();
       }
+      const tocExpand = event.target.closest("[data-toc-expand]");
+      if (tocExpand) {
+        tocExpand.closest(".toc-panel")?.querySelectorAll(".toc-group").forEach(item => { item.open = true; });
+        return;
+      }
+      const tocCollapse = event.target.closest("[data-toc-collapse]");
+      if (tocCollapse) {
+        tocCollapse.closest(".toc-panel")?.querySelectorAll(".toc-group").forEach(item => { item.open = false; });
+        return;
+      }
       if (event.target.closest("[data-reader-search-clear]")) {
         const input = document.getElementById("reader-search");
         input.value = "";
@@ -1858,11 +2007,22 @@
       const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
       document.documentElement.setAttribute("data-theme", next);
       try { localStorage.setItem("light-truth-theme", next); } catch (error) { /* Theme still changes for this visit. */ }
+      updateThemeToggleIcon();
     });
+    function updateThemeToggleIcon() {
+      const button = document.getElementById("theme-toggle");
+      const isDark = document.documentElement.getAttribute("data-theme") === "dark";
+      button.setAttribute("aria-label", isDark ? "Switch to light mode" : "Switch to dark mode");
+      button.setAttribute("title", isDark ? "Switch to light mode" : "Switch to dark mode");
+      button.innerHTML = isDark
+        ? `<svg viewBox="0 0 24 24"><path d="M12 3v2m0 14v2M3 12h2m14 0h2M5.6 5.6 7 7m10 10 1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="4"/></svg>`
+        : `<svg viewBox="0 0 24 24"><path d="M20.5 14.4A8.5 8.5 0 0 1 9.6 3.5a8.5 8.5 0 1 0 10.9 10.9Z"/></svg>`;
+    }
     try {
       const saved = localStorage.getItem("light-truth-theme");
       if (saved === "light" || saved === "dark") document.documentElement.setAttribute("data-theme", saved);
     } catch (error) { /* System theme remains available. */ }
+    updateThemeToggleIcon();
 
     window.addEventListener("hashchange", () => renderRoute());
     renderCatalog();
