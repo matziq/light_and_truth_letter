@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    .bg { fill: #0f2d45; }
+    .page { fill: #f3f0e6; stroke: #b38a1f; stroke-width: 2.5; }
+    .mark { fill: #0f2d45; }
+    .ray { stroke: #b38a1f; stroke-width: 2.5; stroke-linecap: round; }
+    @media (prefers-color-scheme: dark) {
+      .bg { fill: #071b2b; }
+      .page { fill: #f2efe6; stroke: #e4bd54; }
+      .mark { fill: #071b2b; }
+      .ray { stroke: #e4bd54; }
+    }
+  </style>
+  <rect class="bg" width="64" height="64" rx="14"/>
+  <path class="page" d="M17 13h25l7 7v31H17V13Z"/>
+  <path class="page" d="M42 13v8h7"/>
+  <text class="mark" x="33" y="42" text-anchor="middle" font-family="Georgia,serif" font-size="17" font-weight="700">LT</text>
+  <path class="ray" d="M11 21 7 18m4 14H6m7-22-2-4"/>
+</svg>
